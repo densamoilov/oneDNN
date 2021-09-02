@@ -45,7 +45,7 @@ namespace x64 {
 #ifdef _WIN32
 #define STACK_K_CAPACITY 32
 #else
-#define STACK_K_CAPACITY 2048
+#define STACK_K_CAPACITY 32
 #endif
 #define SIZE 4
 #define OFFSET 128
