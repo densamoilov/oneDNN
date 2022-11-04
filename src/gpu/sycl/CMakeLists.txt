@@ -31,6 +31,12 @@ if(DNNL_SYCL_CUDA OR DNNL_SYCL_HIP)
         # Suppress irrelevant warning about incompatible triplets.
         append(CMAKE_CXX_FLAGS "-Wno-linker-warnings")
     endif()
+
+    if(DNNL_SYCL_HIP)
+        append(CMAKE_CXX_FLAGS "-fsycl-targets=amdgcn-amd-amdhsa -Xsycl-target-backend --offload-arch=gfx906")
+        # Suppress irrelevant warning about incompatible triplets.
+        append(CMAKE_CXX_FLAGS "-Wno-linker-warnings")
+    endif()
 else()
     # GPU vendor Intel needs only the following files from this directory.
     set(SOURCES

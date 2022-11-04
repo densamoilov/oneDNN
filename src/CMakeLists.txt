@@ -118,6 +118,14 @@ if(DNNL_WITH_SYCL)
         append(CMAKE_SHARED_LINKER_FLAGS "-fsycl-targets=nvptx64-nvidia-cuda")
         append(CMAKE_STATIC_LINKER_FLAGS "-fsycl-targets=nvptx64-nvidia-cuda")
     endif()
+
+    if(DNNL_SYCL_HIP)
+        append(CMAKE_SHARED_LINKER_FLAGS "-fsycl-targets=amdgcn-amd-amdhsa -Xsycl-target-backend --offload-arch=gfx906")
+        append(CMAKE_STATIC_LINKER_FLAGS "-fsycl-targets=amdgcn-amd-amdhsa -Xsycl-target-backend --offload-arch=gfx906")
+        # Suppress irrelevant warning about incompatible triplets.
+        append(CMAKE_CXX_FLAGS "-Wno-linker-warnings")
+    endif()
+
     add_subdirectory(sycl)
 endif()
 
